@@ -109,7 +109,7 @@ function patch(material, shared, { shell = false, back = false, layer = 0, trans
       #endif
       #ifdef SHELL
       {
-        vec3 fc = vRest * uFurScale; vec3 cell = floor(fc); vec3 fr = fract(fc) - 0.5;
+        vec3 fc = (mat3(0.8,0.36,-0.48, -0.6,0.48,-0.64, 0.0,0.8,0.6) * vRest) * uFurScale; vec3 cell = floor(fc); vec3 fr = fract(fc) - 0.5 - (hash33(cell + 5.0) - 0.5) * 0.7;
         float len = 0.3 + 0.7 * hash13(cell);
         float rr = length(fr) * 2.0;
         float rad = 0.42 + 0.85 * max(0.0, 1.0 - uLayer / len);
@@ -155,7 +155,7 @@ export const SHELL_COUNT = 7;
 export function createMaterials(shared) {
   const common = { vertexColors: true };
   const plush = patch(new THREE.MeshPhysicalMaterial({
-    ...common, roughness: 0.95, metalness: 0, sheen: 1, sheenRoughness: 0.55, sheenColor: new THREE.Color(0.8, 0.8, 0.85),
+    ...common, roughness: 0.95, metalness: 0, sheen: 0.8, sheenRoughness: 0.6, sheenColor: new THREE.Color(0.5, 0.5, 0.55),
   }), shared);
   const shells = [];
   for (let i = 0; i < SHELL_COUNT; i++) {

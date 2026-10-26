@@ -137,7 +137,10 @@ function showScreen(name) {
   if (name === 'select') { setSheet(null); refreshSelect(); }
   else { buildPlayUi(); refreshPlay(true); }
 }
-$('playBtn').onclick = () => { sfx.unlock(); sfx.happy(); showScreen('play'); cur().anim.trigger('happy'); };
+$('playBtn').onclick = () => {
+  sfx.unlock(); sfx.happy(); showScreen('play'); cur().anim.trigger('happy');
+  if (!app.hinted) { app.hinted = true; toast('Squish, stretch, shake & tilt me! 💕', 3200); }
+};
 $('backBtn').onclick = () => { sfx.tap(); showScreen('select'); persist(); };
 
 // ------------------------------------------------------------------ play UI

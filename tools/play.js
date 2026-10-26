@@ -4,7 +4,7 @@ import path from 'node:path';
 const { chromium } = createRequire(import.meta.url)('playwright');
 const steps = (await import(path.resolve(process.argv[2]))).default;
 const b = await chromium.launch({ args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--autoplay-policy=no-user-gesture-required'] });
-const ctx = await b.newContext({ viewport: { width: +(process.env.VW || 412), height: +(process.env.VH || 915) }, deviceScaleFactor: 1, hasTouch: true });
+const ctx = await b.newContext({ viewport: { width: +(process.env.VW || 412), height: +(process.env.VH || 915) }, deviceScaleFactor: +(process.env.DPR || 1), hasTouch: true });
 const page = await ctx.newPage();
 page.on('console', (m) => { const t = m.text(); if (!t.includes('GPU stall')) console.log('[page]', t.slice(0, 600)); });
 page.on('pageerror', (e) => console.log('[ERR]', e.message.slice(0, 800)));

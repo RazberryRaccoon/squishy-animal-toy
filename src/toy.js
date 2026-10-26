@@ -120,7 +120,7 @@ export class Toy {
     _inv.copy(this.group.matrixWorld).invert();
     const ro = _v.copy(ray.origin).applyMatrix4(_inv);
     const rd = _v2.copy(ray.direction).transformDirection(_inv);
-    const v = this.soft.pickVertex([ro.x, ro.y, ro.z], [rd.x, rd.y, rd.z], 0.07 / this.scale);
+    const v = this.soft.pickVertex([ro.x, ro.y, ro.z], [rd.x, rd.y, rd.z], 0.1 / this.scale);
     if (v < 0) return null;
     const P0 = new THREE.Vector3(this.soft.pos[v * 3], this.soft.pos[v * 3 + 1], this.soft.pos[v * 3 + 2]).applyMatrix4(this.group.matrixWorld);
     const part = this.model.parts[this.soft.wB[v] > 0.5 ? this.soft.pb[v] : this.soft.pa[v]].name;
@@ -220,7 +220,7 @@ export class Toy {
       const r = this.soft.reaction;
       const R = _v.set(r[0], r[1], r[2]).applyQuaternion(this.q);
       const rl = R.length();
-      if (rl > 0) R.multiplyScalar(Math.min(rl * 0.010, 5) / rl);
+      if (rl > 0) R.multiplyScalar(Math.min(rl * 0.008, 3.5) / rl);
       a.add(R);
       this.vel.addScaledVector(a, h);
       this.p.addScaledVector(this.vel, h);
@@ -229,7 +229,7 @@ export class Toy {
       const tq = this.soft.reactionTorque;
       const T = new THREE.Vector3(tq[0], tq[1], tq[2]).applyQuaternion(this.q);
       const tl = T.length();
-      if (tl > 0) T.multiplyScalar(Math.min(tl * 0.02, 9) / tl);
+      if (tl > 0) T.multiplyScalar(Math.min(tl * 0.007, 3.5) / tl);
       const alpha = T;
       if (!this.userSpin) {
         // spring back toward facing front
@@ -252,7 +252,7 @@ export class Toy {
       const gl = Math.hypot(g[0], g[1], g[2]);
       if (gl > 1e-4) { _q2.setFromAxisAngle(_axis.set(-g[0], -g[1], -g[2]).normalize(), gl * h * 0.55); this.q.premultiply(_q2).normalize(); }
     }
-    const lim = 1.0;
+    const lim = 0.7;
     const off = this.p.clone().sub(this.home);
     if (off.length() > lim) this.p.copy(this.home).addScaledVector(off.normalize(), lim);
 

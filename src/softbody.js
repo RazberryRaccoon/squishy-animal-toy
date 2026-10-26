@@ -72,7 +72,7 @@ export class SoftBody {
     const pos = this.pos;
     let best = -1, bestT = 1e9;
     for (let pass = 0; pass < 2 && best < 0; pass++) {
-      const r2 = pass === 0 ? radius * radius : radius * radius * 5;
+      const r2 = pass === 0 ? radius * radius : radius * radius * 4.5;
       for (let i = 0; i < this.N; i++) {
         const px = pos[i * 3] - ro[0], py = pos[i * 3 + 1] - ro[1], pz = pos[i * 3 + 2] - ro[2];
         const t = px * rd[0] + py * rd[1] + pz * rd[2];

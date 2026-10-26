@@ -90,8 +90,8 @@ export function createStage(canvas) {
   scene.add(bg);
 
   const stage = {
-    renderer, scene, camera, key, fill, rim, hemi, bgMat, width: 1, height: 1, dpr: Math.min(window.devicePixelRatio || 1, 2),
-    maxDpr: Math.min(window.devicePixelRatio || 1, 2),
+    renderer, scene, camera, key, fill, rim, hemi, bgMat, width: 1, height: 1, dpr: Math.min(window.devicePixelRatio || 1, 1.6),
+    maxDpr: Math.min(window.devicePixelRatio || 1, 1.6),
     visibleHeight: 4, visibleWidth: 2,
     resize() {
       const w = window.innerWidth, h = window.innerHeight;

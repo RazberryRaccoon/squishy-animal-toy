@@ -74,7 +74,7 @@ export const fox = {
 };
 
 // ---------------------------------------------------------------- RACCOON
-const R = { grey: hex(0x8f929c), light: hex(0xd7d8dd), white: hex(0xf4f2ee), dark: hex(0x2c2c35), ring: hex(0x3a3a44) };
+const R = { grey: hex(0x7a7d88), light: hex(0xc4c5cc), white: hex(0xf4f2ee), dark: hex(0x2c2c35), ring: hex(0x3a3a44) };
 export const raccoon = {
   name: 'raccoon',
   spacing: 0.2,
