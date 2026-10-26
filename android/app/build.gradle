@@ -1,0 +1,42 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.ratkey.squishyfriends'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.ratkey.squishyfriends'
+        minSdk 26
+        targetSdk 34
+        versionCode = Integer.parseInt((project.findProperty('vc') ?: '1').toString())
+        versionName = '1.0'
+    }
+
+    // A fixed signing key keeps every build installable over the previous one
+    // (so saved pets survive updates).
+    signingConfigs {
+        squishy {
+            storeFile file('../squishy.keystore')
+            storePassword 'squishy123'
+            keyAlias 'squishy'
+            keyPassword 'squishy123'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.squishy
+        }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.squishy
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
