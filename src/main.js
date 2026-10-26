@@ -458,7 +458,7 @@ function frame(tms) {
   // floating Zzz and the speech bubble
   if (app.screen === 'play') {
     if (pet.sleeping && now - (frame.zz || 0) > 1.7) { frame.zz = now; const s = toScreen(active.headWorld(_v.clone())); floatFx('💤', s.x + 50, s.y - 40, 20); }
-    const bs = toScreen(active.headWorld(_v.clone()).add(new THREE.Vector3(0.5, 1.5 * active.scale, 0)));
+    const bs = toScreen(active.headWorld(_v.clone()).add(new THREE.Vector3(0.45, 0.95 * active.scale, 0.2)));
     const b = $('bubble'); b.style.left = bs.x + 'px'; b.style.top = bs.y + 'px';
     meterClock += dt;
     if (meterClock > 0.4) { meterClock = 0; refreshPlay(); }

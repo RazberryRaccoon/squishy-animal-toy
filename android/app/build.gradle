@@ -10,8 +10,8 @@ android {
         applicationId 'com.ratkey.squishyfriends'
         minSdk 26
         targetSdk 34
-        versionCode (project.findProperty('vc') ?: '1').toInteger()
-        versionName '1.0'
+        versionCode = Integer.parseInt((project.findProperty('vc') ?: '1').toString())
+        versionName = '1.0'
     }
 
     // A fixed signing key keeps every build installable over the previous one

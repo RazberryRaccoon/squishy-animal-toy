@@ -112,9 +112,9 @@ function patch(material, shared, { shell = false, back = false, layer = 0, trans
         vec3 fc = vRest * uFurScale; vec3 cell = floor(fc); vec3 fr = fract(fc) - 0.5;
         float len = 0.3 + 0.7 * hash13(cell);
         float rr = length(fr) * 2.0;
-        float rad = 0.12 + 0.95 * max(0.0, 1.0 - uLayer / len);
+        float rad = 0.42 + 0.85 * max(0.0, 1.0 - uLayer / len);
         if (uLayer > len || rr > rad) discard;
-        diffuseColor.rgb *= mix(0.5, 1.1, uLayer);
+        diffuseColor.rgb *= mix(0.74, 1.1, uLayer);
       }
       #endif`);
     f = f.replace('#include <roughnessmap_fragment>', `#include <roughnessmap_fragment>
@@ -262,7 +262,7 @@ export function applyLook(type, p, mats, shared) {
   u.uGrainAmt.value = 0; u.uBumpAmt.value = 0; u.uSparkle.value = 0; u.uSugar.value = 0;
   switch (type) {
     case 'plush':
-      u.uGrainAmt.value = 0.45; u.uGrainScale.value = 55;
+      u.uGrainAmt.value = 0.3; u.uGrainScale.value = 55;
       u.uShellLen.value = 0.004 + 0.07 * p.fluff;
       u.uFurScale.value = lerp(26, 36, p.fluff);
       mats.plush.sheen = lerp(0.5, 1, p.fluff);
